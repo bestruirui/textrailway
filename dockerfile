@@ -1,1 +1,1 @@
-FROM iceslam/server-uptime-rest
+FROM misaon/uptime-nuxt
