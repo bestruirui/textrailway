@@ -1,1 +1,1 @@
-FROM misaon/uptime-nuxt
+FROM misaon/uptime-nuxt:latest
