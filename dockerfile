@@ -1,1 +1,1 @@
-FROM FROM louislam/uptime-kuma
+FROM louislam/uptime-kuma
