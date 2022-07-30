@@ -1,8 +1,7 @@
 version: '2'
-
 services:
   rocketchat:
-    image: registry.as4k.com/rocket.chat:3
+    image: rocketchat/rocket.chat:latest
     command: >
       bash -c
         "for i in `seq 1 30`; do
@@ -29,7 +28,6 @@ services:
     labels:
       - "traefik.backend=rocketchat"
       - "traefik.frontend.rule=Host: your.domain.tld"
-
   mongo:
     image: mongo:4.0
     restart: unless-stopped
@@ -39,7 +37,6 @@ services:
     command: mongod --smallfiles --oplogSize 128 --replSet rs0 --storageEngine=mmapv1
     labels:
       - "traefik.enable=false"
-
   # this container's job is just run the command to initialize the replica set.
   # it will run the command and remove himself (it will not stay running)
   mongo-init-replica:
@@ -57,7 +54,6 @@ services:
         done; (exit $$s)"
     depends_on:
       - mongo
-
   # hubot, the popular chatbot (add the bot user first and change the password before starting this image)
   hubot:
     image: rocketchat/hubot-rocketchat:latest
@@ -79,7 +75,6 @@ services:
   # this is used to expose the hubot port for notifications on the host on port 3001, e.g. for hubot-jenkins-notifier
     ports:
       - 3001:8080
-
   #traefik:
   #  image: traefik:latest
   #  restart: unless-stopped
