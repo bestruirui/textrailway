@@ -1,15 +1,31 @@
----
-version: '3'
-#---------------------------------------------------------------------#
-#                Homarr -  A homepage for your server.                #
-#---------------------------------------------------------------------#
+version: '3.1'
+
 services:
-  homarr:
-    container_name: homarr
-    image: ghcr.io/ajnart/homarr:latest
-    restart: unless-stopped
-    volumes:
-      - ./homarr/configs:/app/data/configs
-      - ./homarr/icons:/app/public/icons
+
+  wordpress:
+    image: wordpress
+    restart: always
     ports:
-      - '7575:7575'
+      - 8080:80
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: exampleuser
+      WORDPRESS_DB_PASSWORD: examplepass
+      WORDPRESS_DB_NAME: exampledb
+    volumes:
+      - /root/data/docker_data/wordpress/data:/var/www/html
+
+  db:
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_DATABASE: exampledb
+      MYSQL_USER: exampleuser
+      MYSQL_PASSWORD: examplepass
+      MYSQL_RANDOM_ROOT_PASSWORD: '1'
+    volumes:
+      - /root/data/docker_data/wordpress/db:/var/lib/mysql
+
+#volumes:
+#  wordpress:
+#  db:
