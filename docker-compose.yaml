@@ -1,13 +1,11 @@
 
 
 
----
+
 version: "3"
 services:
-  nextcloud:
-    image: illyathehath/dandan-api
-    container_name: nextcloud
-    
-   
-    ports:
-      - 4433:8080
+    dandan:
+      image: illyathehath/dandan-api
+      container_name: danadn
+      ports:
+        - 8080:8080
