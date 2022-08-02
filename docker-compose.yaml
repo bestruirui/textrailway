@@ -2,7 +2,6 @@ version: "3"
 services:
   dandan:
     image: illyathehath/dandan-api
-    # build: .
     restart: always
     ports:
       - "8080:8080"
